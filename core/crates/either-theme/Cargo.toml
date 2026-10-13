@@ -1,0 +1,10 @@
+[package]
+name = "either-theme"
+description = "Design tokens to QML, Hyprland, GTK, Qt and terminal. Filled in at 0.2.0."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true

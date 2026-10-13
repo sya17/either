@@ -1,0 +1,26 @@
+# Build output
+target/
+build/
+out/
+
+# Packaging output (makepkg, repo-add, mkarchiso)
+packaging/pkgbuilds/*/src/
+packaging/pkgbuilds/*/pkg/
+*.pkg.tar.*
+*.iso
+*.sig
+
+# Secrets and key material: never in the repo
+.env
+.env.*
+*.pem
+*.key
+*.gpg
+*.kdbx
+*.ovpn
+
+# OS and editor
+.DS_Store
+*.swp
+*~
+*.log

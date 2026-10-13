@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Fast checks on staged files. A missing tool is skipped with a note; CI is the authority.
+set -uo pipefail
+
+cd "$(git rev-parse --show-toplevel)" || exit 1
+fail=0
+
+staged() { git diff --cached --name-only --diff-filter=ACMR -- "$@"; }
+have() { command -v "$1" >/dev/null 2>&1 || { echo "pre-commit: $1 not installed, skipping"; return 1; }; }
+
+# Signing keys live offline (U27); a private key in a commit is always a mistake.
+if git diff --cached -U0 | grep -qE '^\+.*-----BEGIN [A-Z ]*PRIVATE KEY-----'; then
+    echo "pre-commit: a private key is staged." >&2
+    fail=1
+fi
+
+# Per-clone word list; no list means no check.
+list="$(git rev-parse --git-path info/forbidden-words)"
+if [[ -s "$list" ]]; then
+    if { git diff --cached --name-only; git diff --cached -U0 | grep -E '^\+[^+]'; } | grep -Ei -f "$list" >/dev/null; then
+        echo "pre-commit: staged paths or lines match the local word list (info/forbidden-words)." >&2
+        fail=1
+    fi
+fi
+
+if [[ -n "$(staged '*.rs' '*Cargo.toml')" ]] && have cargo; then
+    (cd core && cargo fmt --all --check) || fail=1
+fi
+
+mapfile -t sh_files < <(staged 'scripts' | xargs -r grep -lE '^#!.*(ba)?sh' 2>/dev/null)
+if ((${#sh_files[@]})) && have shellcheck; then
+    shellcheck "${sh_files[@]}" || fail=1
+fi
+
+mapfile -t qml_files < <(staged '*.qml')
+if ((${#qml_files[@]})) && have qmllint; then
+    qmllint "${qml_files[@]}" || fail=1
+fi
+
+exit "$fail"

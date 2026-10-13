@@ -1,0 +1,4 @@
+# Toolchain is pinned to an exact version. Bump it in its own PR together with Cargo.lock changes.
+[toolchain]
+channel = "1.99.0"
+components = ["rustfmt", "clippy"]

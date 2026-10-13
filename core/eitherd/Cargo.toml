@@ -1,0 +1,10 @@
+[package]
+name = "eitherd"
+description = "either core daemon: owner of state, config, theme and the event bus"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true

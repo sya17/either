@@ -1,0 +1,30 @@
+# Baseline B10: advisories and licenses fail the build. The allowlist is the one in
+# docs/researchs/03-build-rilis-distribusi.md ("Allowlist dependensi").
+# `just deny` passes on the empty workspace; the "license not encountered" warnings go away once dependencies exist.
+
+[advisories]
+yanked = "deny"
+
+[licenses]
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "Zlib",
+    "MPL-2.0",
+    "LGPL-2.1-only",
+    "LGPL-2.1-or-later",
+    "LGPL-3.0-only",
+    "LGPL-3.0-or-later",
+    "GPL-2.0-only",
+    "GPL-2.0-or-later",
+    "GPL-3.0-only",
+    "GPL-3.0-or-later",
+    # "Unicode-3.0" is likely needed (unicode-ident). Add it in a PR that says why, not silently.
+]
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"

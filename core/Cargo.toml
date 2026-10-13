@@ -1,0 +1,20 @@
+[workspace]
+resolver = "3"
+members = ["crates/*", "eitherd", "either-cli"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+# Baseline B11. The owner has not decided the license yet (Q5): keep it until the decision lands.
+license = "GPL-3.0-or-later"
+# Nothing here goes to crates.io; the name `either` is also taken there.
+publish = false
+
+[workspace.lints.rust]
+# Exceptions need `#[allow(unsafe_code)]`, a `// SAFETY:` comment, and a mention in the PR.
+unsafe_code = "deny"
+
+[workspace.lints.clippy]
+unwrap_used = "warn"
+dbg_macro = "warn"
+todo = "warn"
