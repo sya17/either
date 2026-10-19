@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 504" width="1000" height="504" font-family="ui-monospace, 'JetBrains Mono', monospace">
+<rect x="0" y="0" width="1000" height="244" rx="13" fill="#171826"/>
+<text x="28" y="34" font-family="Manrope, system-ui, sans-serif" font-size="18" font-weight="500" fill="#E7E9F6">either Dusk</text>
+<rect x="28" y="52" width="76" height="44" rx="8" fill="#11121D" stroke="#34374F" stroke-width="1"/>
+<text x="28" y="112" font-size="11" fill="#A6B1E1">surface-crust</text>
+<text x="28" y="126" font-size="10" fill="#7F85AD">#11121D</text>
+<rect x="152" y="52" width="76" height="44" rx="8" fill="#171826" stroke="#34374F" stroke-width="1"/>
+<text x="152" y="112" font-size="11" fill="#A6B1E1">surface-0</text>
+<text x="152" y="126" font-size="10" fill="#7F85AD">#171826</text>
+<rect x="276" y="52" width="76" height="44" rx="8" fill="#1F2133" stroke="#34374F" stroke-width="1"/>
+<text x="276" y="112" font-size="11" fill="#A6B1E1">surface-1</text>
+<text x="276" y="126" font-size="10" fill="#7F85AD">#1F2133</text>
+<rect x="400" y="52" width="76" height="44" rx="8" fill="#2A2C42" stroke="#34374F" stroke-width="1"/>
+<text x="400" y="112" font-size="11" fill="#A6B1E1">surface-2</text>
+<text x="400" y="126" font-size="10" fill="#7F85AD">#2A2C42</text>
+<rect x="524" y="52" width="76" height="44" rx="8" fill="#424874" stroke="#34374F" stroke-width="1"/>
+<text x="524" y="112" font-size="11" fill="#A6B1E1">highlight-med</text>
+<text x="524" y="126" font-size="10" fill="#7F85AD">#424874</text>
+<rect x="648" y="52" width="76" height="44" rx="8" fill="#7F85AD" stroke="#34374F" stroke-width="1"/>
+<text x="648" y="112" font-size="11" fill="#A6B1E1">fg-faint</text>
+<text x="648" y="126" font-size="10" fill="#7F85AD">#7F85AD</text>
+<rect x="772" y="52" width="76" height="44" rx="8" fill="#A6B1E1" stroke="#34374F" stroke-width="1"/>
+<text x="772" y="112" font-size="11" fill="#A6B1E1">fg-muted</text>
+<text x="772" y="126" font-size="10" fill="#7F85AD">#A6B1E1</text>
+<rect x="896" y="52" width="76" height="44" rx="8" fill="#E7E9F6" stroke="#34374F" stroke-width="1"/>
+<text x="896" y="112" font-size="11" fill="#A6B1E1">fg</text>
+<text x="896" y="126" font-size="10" fill="#7F85AD">#E7E9F6</text>
+<rect x="28" y="144" width="76" height="44" rx="8" fill="#8DA2FF" stroke="#34374F" stroke-width="1"/>
+<text x="28" y="204" font-size="11" fill="#A6B1E1">brand</text>
+<text x="28" y="218" font-size="10" fill="#7F85AD">#8DA2FF</text>
+<rect x="152" y="144" width="76" height="44" rx="8" fill="#FF9E7D" stroke="#34374F" stroke-width="1"/>
+<text x="152" y="204" font-size="11" fill="#A6B1E1">accent</text>
+<text x="152" y="218" font-size="10" fill="#7F85AD">#FF9E7D</text>
+<rect x="276" y="144" width="76" height="44" rx="8" fill="#F38BA0" stroke="#34374F" stroke-width="1"/>
+<text x="276" y="204" font-size="11" fill="#A6B1E1">ansi-red</text>
+<text x="276" y="218" font-size="10" fill="#7F85AD">#F38BA0</text>
+<rect x="400" y="144" width="76" height="44" rx="8" fill="#9DD6A8" stroke="#34374F" stroke-width="1"/>
+<text x="400" y="204" font-size="11" fill="#A6B1E1">ansi-green</text>
+<text x="400" y="218" font-size="10" fill="#7F85AD">#9DD6A8</text>
+<rect x="524" y="144" width="76" height="44" rx="8" fill="#F2CE8A" stroke="#34374F" stroke-width="1"/>
+<text x="524" y="204" font-size="11" fill="#A6B1E1">ansi-yellow</text>
+<text x="524" y="218" font-size="10" fill="#7F85AD">#F2CE8A</text>
+<rect x="648" y="144" width="76" height="44" rx="8" fill="#8DA2FF" stroke="#34374F" stroke-width="1"/>
+<text x="648" y="204" font-size="11" fill="#A6B1E1">ansi-blue</text>
+<text x="648" y="218" font-size="10" fill="#7F85AD">#8DA2FF</text>
+<rect x="772" y="144" width="76" height="44" rx="8" fill="#C4A7FF" stroke="#34374F" stroke-width="1"/>
+<text x="772" y="204" font-size="11" fill="#A6B1E1">ansi-magenta</text>
+<text x="772" y="218" font-size="10" fill="#7F85AD">#C4A7FF</text>
+<rect x="896" y="144" width="76" height="44" rx="8" fill="#89D2DE" stroke="#34374F" stroke-width="1"/>
+<text x="896" y="204" font-size="11" fill="#A6B1E1">ansi-cyan</text>
+<text x="896" y="218" font-size="10" fill="#7F85AD">#89D2DE</text>
+<rect x="0" y="260" width="1000" height="244" rx="13" fill="#F7F3F0"/>
+<text x="28" y="294" font-family="Manrope, system-ui, sans-serif" font-size="18" font-weight="500" fill="#2A2B3F">either Dawn</text>
+<rect x="28" y="312" width="76" height="44" rx="8" fill="#EDE6E0" stroke="#DDD6D0" stroke-width="1"/>
+<text x="28" y="372" font-size="11" fill="#5E6288">surface-crust</text>
+<text x="28" y="386" font-size="10" fill="#6A6E8C">#EDE6E0</text>
+<rect x="152" y="312" width="76" height="44" rx="8" fill="#F7F3F0" stroke="#DDD6D0" stroke-width="1"/>
+<text x="152" y="372" font-size="11" fill="#5E6288">surface-0</text>
+<text x="152" y="386" font-size="10" fill="#6A6E8C">#F7F3F0</text>
+<rect x="276" y="312" width="76" height="44" rx="8" fill="#FFFDFB" stroke="#DDD6D0" stroke-width="1"/>
+<text x="276" y="372" font-size="11" fill="#5E6288">surface-1</text>
+<text x="276" y="386" font-size="10" fill="#6A6E8C">#FFFDFB</text>
+<rect x="400" y="312" width="76" height="44" rx="8" fill="#EFE9E4" stroke="#DDD6D0" stroke-width="1"/>
+<text x="400" y="372" font-size="11" fill="#5E6288">surface-2</text>
+<text x="400" y="386" font-size="10" fill="#6A6E8C">#EFE9E4</text>
+<rect x="524" y="312" width="76" height="44" rx="8" fill="#DCD6F7" stroke="#DDD6D0" stroke-width="1"/>
+<text x="524" y="372" font-size="11" fill="#5E6288">highlight-med</text>
+<text x="524" y="386" font-size="10" fill="#6A6E8C">#DCD6F7</text>
+<rect x="648" y="312" width="76" height="44" rx="8" fill="#6A6E8C" stroke="#DDD6D0" stroke-width="1"/>
+<text x="648" y="372" font-size="11" fill="#5E6288">fg-faint</text>
+<text x="648" y="386" font-size="10" fill="#6A6E8C">#6A6E8C</text>
+<rect x="772" y="312" width="76" height="44" rx="8" fill="#5E6288" stroke="#DDD6D0" stroke-width="1"/>
+<text x="772" y="372" font-size="11" fill="#5E6288">fg-muted</text>
+<text x="772" y="386" font-size="10" fill="#6A6E8C">#5E6288</text>
+<rect x="896" y="312" width="76" height="44" rx="8" fill="#2A2B3F" stroke="#DDD6D0" stroke-width="1"/>
+<text x="896" y="372" font-size="11" fill="#5E6288">fg</text>
+<text x="896" y="386" font-size="10" fill="#6A6E8C">#2A2B3F</text>
+<rect x="28" y="404" width="76" height="44" rx="8" fill="#424874" stroke="#DDD6D0" stroke-width="1"/>
+<text x="28" y="464" font-size="11" fill="#5E6288">brand</text>
+<text x="28" y="478" font-size="10" fill="#6A6E8C">#424874</text>
+<rect x="152" y="404" width="76" height="44" rx="8" fill="#FF9E7D" stroke="#DDD6D0" stroke-width="1"/>
+<text x="152" y="464" font-size="11" fill="#5E6288">accent</text>
+<text x="152" y="478" font-size="10" fill="#6A6E8C">#FF9E7D</text>
+<rect x="276" y="404" width="76" height="44" rx="8" fill="#B23F5A" stroke="#DDD6D0" stroke-width="1"/>
+<text x="276" y="464" font-size="11" fill="#5E6288">ansi-red</text>
+<text x="276" y="478" font-size="10" fill="#6A6E8C">#B23F5A</text>
+<rect x="400" y="404" width="76" height="44" rx="8" fill="#357248" stroke="#DDD6D0" stroke-width="1"/>
+<text x="400" y="464" font-size="11" fill="#5E6288">ansi-green</text>
+<text x="400" y="478" font-size="10" fill="#6A6E8C">#357248</text>
+<rect x="524" y="404" width="76" height="44" rx="8" fill="#82600E" stroke="#DDD6D0" stroke-width="1"/>
+<text x="524" y="464" font-size="11" fill="#5E6288">ansi-yellow</text>
+<text x="524" y="478" font-size="10" fill="#6A6E8C">#82600E</text>
+<rect x="648" y="404" width="76" height="44" rx="8" fill="#3E50B8" stroke="#DDD6D0" stroke-width="1"/>
+<text x="648" y="464" font-size="11" fill="#5E6288">ansi-blue</text>
+<text x="648" y="478" font-size="10" fill="#6A6E8C">#3E50B8</text>
+<rect x="772" y="404" width="76" height="44" rx="8" fill="#7448B8" stroke="#DDD6D0" stroke-width="1"/>
+<text x="772" y="464" font-size="11" fill="#5E6288">ansi-magenta</text>
+<text x="772" y="478" font-size="10" fill="#6A6E8C">#7448B8</text>
+<rect x="896" y="404" width="76" height="44" rx="8" fill="#22707F" stroke="#DDD6D0" stroke-width="1"/>
+<text x="896" y="464" font-size="11" fill="#5E6288">ansi-cyan</text>
+<text x="896" y="478" font-size="10" fill="#6A6E8C">#22707F</text>
+</svg>
