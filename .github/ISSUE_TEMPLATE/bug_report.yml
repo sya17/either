@@ -1,0 +1,39 @@
+name: Bug report
+description: Something does not work, or looks wrong
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        either is pre-release software. If you are not sure whether something is a bug or simply not built yet, check the [roadmap](https://github.com/sya17/either/blob/main/docs/roadmap.md) first.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you saw instead. A screenshot helps; hide anything private first.
+    validations:
+      required: true
+  - type: input
+    id: area
+    attributes:
+      label: Which part
+      description: For example the daemon, the CLI, the shell, the theme, packaging, the documentation.
+  - type: input
+    id: version
+    attributes:
+      label: either version or commit
+      description: A release number, or the commit hash if you build from source.
+  - type: textarea
+    id: system
+    attributes:
+      label: Your system
+      description: Paste the output of `hyprctl version | head -3` and `uname -r`, and say which GPU you have.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Output or log
+      description: The error text, or `journalctl --user -u eitherd -b`. Remove personal paths and names.
+      render: shell
