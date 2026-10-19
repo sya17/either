@@ -28,6 +28,8 @@ def main() -> int:
         path = ROOT / name
         if name.startswith("LICENSES/") or path.name in SKIP_NAMES or path.suffix in SKIP_SUFFIXES:
             continue
+        if path == Path(__file__).resolve():  # holds the word list itself
+            continue
         if not path.is_file() or path.is_symlink():
             continue
         try:
