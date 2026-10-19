@@ -1,14 +1,21 @@
-# Dokumentasi
+# Documentation
 
-Mulai dari [overview.md](overview.md).
-
-| Dokumen | Isi |
+| Document | What it covers |
 | --- | --- |
-| [overview.md](overview.md) | konteks, keputusan final, arsitektur, scope, rencana rilis, istilah |
-| [development/setup.md](development/setup.md) | prasyarat, build, menjalankan, debug |
-| [development/rules.md](development/rules.md) | aturan kode, penamaan, struktur, IPC, keamanan dalam kode |
-| [development/design.md](development/design.md) | identitas, token, tipografi, motion, permukaan, komponen, aksesibilitas |
-| [development/workflow.md](development/workflow.md) | SDLC, git, PR, review, rilis, pemeliharaan |
-| [development/quality-security.md](development/quality-security.md) | gerbang kualitas, alat, dependensi, keamanan |
-| [development/readiness.md](development/readiness.md) | yang sudah diterapkan dan yang menunggu keputusan |
-| [adr/](adr/README.md) | keputusan arsitektur |
+| [Architecture](architecture.md) | Layers, processes, configuration, the IPC contract, and the security model |
+| [Roadmap](roadmap.md) | Releases 0.1.0 to 1.0.0, their scope and exit criteria |
+| [Development setup](development/setup.md) | Prerequisites, building, running, and debugging |
+| [Workflow](development/workflow.md) | Lifecycle of a change, git conventions, pull requests, releases |
+| [Coding standards](development/coding-standards.md) | Naming, Rust, tests, async code, filesystem, QML, IPC, security |
+| [Quality gates](development/quality.md) | The checks that every change must pass, and what each one proves |
+| [Design system](development/design-system.md) | Identity, tokens, typography, motion, surfaces, components |
+| [Decision records](adr/README.md) | Why the project is built the way it is, and which decisions are still open |
+
+## Images
+
+The README banners, the palette, and the social preview in `docs/assets/` are generated from the design tokens and the master logo files, not drawn by hand. Regenerate them with:
+
+```bash
+python3 scripts/gen-docs-assets.py
+rsvg-convert -w 1280 docs/assets/social-preview.svg -o docs/assets/social-preview.png
+```

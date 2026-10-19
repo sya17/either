@@ -1,17 +1,15 @@
-# assets
+# Brand assets
 
-Berkas identitas: logo, ikon aplikasi, dan sub-brand. Aturan pemakaiannya ada di [docs/development/design.md](../../docs/development/design.md#logo-dan-simbol-orbit).
+The logo, the app icons, and the sub-brand lockups. The rules for using them are in [the design system](../../docs/development/design-system.md#logo-and-the-orbit-symbol).
 
-Berkas master diekspor dari design system either (2026-10-13). Jangan menggambar ulang logo atau mengubah berkas ini dengan tangan; ekspor ulang dari sumbernya. `just tokens-check` memeriksa bahwa setiap warna di SVG adalah nilai token dan tidak ada skrip, gambar, gaya, teks hidup, atau tautan.
+The files are the master export of the either design system (2026-10-13). Do not redraw a logo or edit these files by hand; export them again from the source. `just tokens-check` verifies that every color in an SVG is a token value and that no file contains a script, an image, a style, live text, or a link.
 
-Berkas (20):
-
-| Folder | Berkas |
+| Folder | Files |
 | --- | --- |
 | `logos/` | `either-lockup-dusk.svg`, `either-lockup-dawn.svg`, `either-lockup-mono-light.svg`, `either-lockup-mono-dark.svg`, `either-lockup-two-tone-dusk.svg` |
 | `icons/` | `either-icon-dusk.svg`, `either-icon-dawn.svg`, `either-icon-transparent.svg`, `either-icon-two-tone.svg`, `either-icon-mono-light.svg`, `either-icon-mono-dark.svg`, `either-icon-small-dusk.svg`, `either-icon-small-mono-light.svg`, `either-icon-small-mono-dark.svg` |
 | `sub-brands/` | `either-{shell,companion,cli}-{dusk,dawn}.svg` |
 
-Pemakaian: lockup horizontal sebagai logo utama, ikon aplikasi untuk launcher dan paket, master kecil (`icon-small-*`) untuk 16–24 px, master mono di bawah 32 px pada Dawn. Wordmark sudah berupa outline Manrope Light, jadi tidak membutuhkan font saat dirender.
+Use the horizontal lockup as the main logo, the app icon for the launcher and packages, the small master (`icon-small-*`) at 16 to 24 px, and the mono master below 32 px on Dawn. The wordmark is already outlined Manrope Light, so no font is needed to render it.
 
-Setiap aset (font, ikon, suara, wallpaper) wajib berlisensi bebas. Lisensi dan sumber aset di folder ini dicatat di [../LICENSES.md](../LICENSES.md).
+Licenses and sources: [LICENSES.md](LICENSES.md).

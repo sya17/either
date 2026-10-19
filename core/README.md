@@ -1,19 +1,18 @@
 # core
 
-Cargo workspace untuk komponen Rust (B4). Semua perintah cargo dijalankan dari folder ini; `just` sudah melakukannya.
+The Cargo workspace for the Rust components. Run cargo commands from this folder; `just` already does that.
 
-| Paket | Isi | Mulai diisi |
+| Package | Purpose | Gets its code in |
 | --- | --- | --- |
-| `crates/either-ipc` | kontrak protokol IPC: pesan, event, versi, JSON Schema | 0.1.0 |
-| `crates/either-hypr` | client socket Hyprland (request dan event) | 0.1.0 |
-| `crates/either-dbus` | bridge D-Bus (zbus) | klaim nama bus di 0.1.0 bila ADR Q7 mengharuskan; MPRIS di 0.3.0 |
-| `crates/either-config` | skema `config.toml` dan validasi | 0.2.0 |
-| `crates/either-theme` | token → QML, Hyprland, GTK, Qt, terminal | 0.2.0 |
-| `eitherd` | daemon inti | 0.1.0 |
-| `either-cli` | paket untuk binary `either` (`[[bin]] name = "either"`) | 0.1.0 |
+| `crates/either-ipc` | the IPC protocol contract: messages, events, versions, JSON Schema | 0.1.0 |
+| `crates/either-hypr` | the Hyprland socket client (requests and events) | 0.1.0 |
+| `crates/either-dbus` | the D-Bus bridge (zbus) | 0.1.0 if the D-Bus name decision requires it; MPRIS in 0.3.0 |
+| `crates/either-config` | the `config.toml` schema and validation | 0.2.0 |
+| `crates/either-theme` | tokens to QML, Hyprland, GTK, Qt, and the terminal | 0.2.0 |
+| `eitherd` | the core daemon | 0.1.0 |
+| `either-cli` | the package that builds the `either` binary (`[[bin]] name = "either"`) | 0.1.0 |
 
-- Tidak ada paket bernama `either` saja: nama itu sudah dipakai crate populer.
-- `either-agentd` tidak dibuat sebelum 1.0.0 (B16).
-- Isi crate sekarang hanya kerangka supaya workspace bisa dikompilasi; kodenya diisi pada rilis di kolom kanan.
-- `Cargo.lock` wajib di-commit dan build memakai `--locked`. Lockfile dibuat dengan `cargo generate-lockfile` dan ikut di-commit.
-- Aturan kode ada di [docs/development/rules.md](../docs/development/rules.md).
+- No package is named plain `either`, because a popular crate already uses that name.
+- The crates are skeletons so the workspace compiles; their code arrives with the release in the right-hand column.
+- `Cargo.lock` is committed and builds use `--locked`.
+- Coding conventions: [docs/development/coding-standards.md](../docs/development/coding-standards.md).

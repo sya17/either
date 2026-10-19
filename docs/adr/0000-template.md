@@ -1,23 +1,23 @@
-# ADR NNNN: Judul keputusan
+# ADR NNNN: Title of the decision
 
-- **Status:** diusulkan
-- **Tanggal:** YYYY-MM-DD
-- **Menyelesaikan:** ID dari docs/researchs, dipisah koma (contoh: U1, I1, A4)
-- **Diputuskan oleh:** Tech Lead | pemilik proyek
+- **Status:** proposed
+- **Date:** YYYY-MM-DD
+- **Resolves:** question or proposal identifiers, comma separated (for example Q5, U1)
+- **Decided by:** project owner | maintainer
 
-## Konteks
+## Context
 
-Masalah yang dijawab dan batasannya. Tautkan bagian dokumen riset; jangan menyalinnya.
+The problem being answered and its constraints. Link the relevant material; do not copy it.
 
-## Pilihan
+## Options
 
-| Pilihan | Kelebihan | Kekurangan | Bisa dibalik? |
+| Option | Advantages | Drawbacks | Reversible? |
 | --- | --- | --- | --- |
 
-## Keputusan
+## Decision
 
-Pilihan yang diambil dan alasan teknisnya. Untuk keputusan pemilik proyek: kutip kata-katanya dan tanggalnya.
+The option chosen and the technical reasons. For a decision that belongs to the project owner, quote their words and the date.
 
-## Konsekuensi
+## Consequences
 
-Berkas dan tugas yang berubah, hal yang menjadi lebih sulit, dan baris yang harus diperbarui di `docs/development/readiness.md` dan `docs/adr/README.md`.
+Files and work that change, what becomes harder, and which tables (the decision list in `docs/adr/README.md`) must be updated.

@@ -1,82 +1,93 @@
-# Setup, build, dan debug
+# Development setup
 
-Target: Arch Linux dengan sesi Hyprland. Bagian bertanda **belum diverifikasi** adalah rencana dari dokumen riset yang belum pernah dijalankan di repo ini; verifikasinya adalah tugas tersendiri.
+Target platform: Arch Linux with a Hyprland session. Parts marked **unverified** are plans that have not yet been run in this repository.
 
-## 1. Prasyarat
-
-```bash
-sudo pacman -S --needed base-devel git rustup just shellcheck cargo-deny qt6-declarative
-```
-
-`qt6-declarative` menyediakan `qmllint`. Untuk bekerja di shell, tambahkan `quickshell hyprland uwsm`. Opsional: `cargo-audit`, `git-cliff`, `socat` (debug socket), `qemu-desktop` dan `devtools` (uji VM dan build paket di chroot bersih, mulai 0.1.0 untuk paket lokal dan 0.7.0 untuk ISO).
-
-Toolchain Rust dipasang rustup dari `core/rust-toolchain.toml`. Rustup tidak memasangnya otomatis:
+## 1. Prerequisites
 
 ```bash
-cd core && rustup toolchain install   # tanpa argumen: memasang toolchain dari rust-toolchain.toml
+sudo pacman -S --needed base-devel git rustup just shellcheck cargo-deny qt6-declarative python
 ```
 
-## 2. Clone dan hook
+`qt6-declarative` provides `qmllint`. For shell work also install `quickshell hyprland uwsm`. Optional: `github-cli` (for `just pr`), `cargo-audit`, `git-cliff`, `socat` (to debug the socket), and `qemu-desktop` with `devtools` (VM tests and clean-chroot package builds, needed from the first package onward).
+
+The Rust toolchain is pinned in `core/rust-toolchain.toml`. Install it with:
 
 ```bash
-git clone https://github.com/sya17/either.git either && cd either   # CI dan pelaporan kerentanan menunggu keputusan (Q4)
-just setup                                  # mengaktifkan hook commit-msg dan pre-commit
-just check                                  # semua gerbang PR
+cd core && rustup toolchain install   # without arguments: installs the toolchain from rust-toolchain.toml
 ```
 
-`core/Cargo.lock` sudah dibuat dan harus ikut di-commit. Setiap perubahan dependensi memperbaruinya di PR yang sama; build dan tes memakai `--locked`.
+## 2. Clone and install the hooks
 
-## 3. Perintah sehari-hari
+```bash
+git clone https://github.com/sya17/either.git
+cd either
+just setup    # enables the commit-msg, pre-commit and pre-push hooks
+just check    # every gate a pull request must pass
+```
 
-| Perintah | Fungsi |
+`core/Cargo.lock` is committed. Every dependency change updates it in the same pull request, and builds and tests use `--locked`.
+
+## 3. Everyday commands
+
+| Command | Purpose |
 | --- | --- |
-| `just` | daftar semua perintah |
-| `just check` | semua gerbang PR: format, lint, tes, deny, dokumen, token, literal QML |
-| `just fmt` | format kode Rust |
-| `just test` | tes workspace |
+| `just` | list all recipes |
+| `just check` | every pull request gate: format, lint, tests, deny, docs, language, tokens, QML literals, SPDX headers, scope |
+| `just fmt` | format the Rust code |
+| `just test` | run the workspace tests |
+| `just pr "<title>" <body-file>` | open a pull request; the title and body are checked like a commit message |
 
-Perintah `just dev`, `just pkg`, `just iso`, `just vm` ada di rencana (lihat [03-build-rilis-distribusi.md](../researchs/03-build-rilis-distribusi.md#lingkungan-development)) dan ditambahkan saat dibutuhkan.
+Recipes such as `just dev`, `just pkg`, `just iso`, and `just vm` are added when the work that needs them begins.
 
-## 4. Menjalankan project
+## 4. Running the project
 
-Belum ada yang bisa dijalankan. Urutan yang akan berlaku di 0.1.0:
+Nothing is runnable yet. The order that will apply in 0.1.0:
 
-| Setelah | Perintah |
+| Once this exists | Command |
 | --- | --- |
-| `eitherd` ada | `cd core && EITHER_RUNTIME_DIR=/tmp/either-dev EITHER_LOG=debug cargo run -p eitherd` |
-| `either ipc ping` ada | `cd core && EITHER_RUNTIME_DIR=/tmp/either-dev cargo run -p either-cli -- ipc ping` |
-| bar minimal ada | `quickshell -p shell` |
-| PKGBUILD lokal ada | `cd packaging/pkgbuilds/either-core && makepkg -si` |
+| `eitherd` | `cd core && EITHER_RUNTIME_DIR="$XDG_RUNTIME_DIR/either-dev" EITHER_LOG=debug cargo run -p eitherd` |
+| `either ipc ping` | `cd core && EITHER_RUNTIME_DIR="$XDG_RUNTIME_DIR/either-dev" cargo run -p either-cli -- ipc ping` |
+| the minimal bar | `quickshell -p shell` |
+| the local PKGBUILD | `cd packaging/pkgbuilds/either-core && makepkg -si` |
 
-`EITHER_RUNTIME_DIR` memisahkan socket dev dari `eitherd` asli milik sesi, supaya keduanya tidak bentrok. Variabel ini kontrak dari dokumen riset dan harus diimplementasikan di `eitherd` (0.1.0).
+`EITHER_RUNTIME_DIR` keeps the development socket apart from the real `eitherd` of your session, so the two never collide. Use a directory under `$XDG_RUNTIME_DIR` or one made with `mktemp -d`, never a fixed name in `/tmp`. The variable is part of the design and is implemented in `eitherd`.
 
-### Hyprland bersarang (nested)
+### Nested Hyprland (unverified)
 
-Rencana dokumen riset: mengembangkan shell di dalam Hyprland yang berjalan sebagai window di sesi yang ada, supaya sesi harian tidak rusak. **Belum diverifikasi (A6).** Sampai terverifikasi:
+The plan is to develop the shell inside a Hyprland instance that runs as a window in the current session, so the daily session is never at risk. This has not been verified yet. Until it is, do not start nested or headless Hyprland from scripts; the maintainer tries it and records the commands and limits here.
 
-- jangan menjalankan Hyprland bersarang atau headless dari skrip; pemilik mesin yang mencobanya dan mencatat hasilnya di sini;
-- setelah terverifikasi, perintah dan batasannya ditulis di sini.
+## 5. Debugging
 
-## 5. Debug
-
-| Kebutuhan | Cara |
+| Need | How |
 | --- | --- |
-| Log daemon | `journalctl --user -u eitherd -f`; level lewat `EITHER_LOG` (`trace`, `debug`, `info`) |
-| Bicara langsung ke core socket | `socat - UNIX-CONNECT:$XDG_RUNTIME_DIR/either/core.sock`, lalu kirim satu baris JSON, misalnya `{"jsonrpc":"2.0","id":1,"method":"hello","params":{"proto":1,"client":"debug","version":"0.1.0"}}` |
-| State Hyprland | `hyprctl`; log: `$XDG_RUNTIME_DIR/hypr/<instance>/hyprland.log` |
-| Crash | `coredumpctl`; crash report Hyprland: `~/.cache/hyprland/hyprlandCrashReport<PID>.txt` |
-| Unit gagal | `systemctl --user --failed` |
-| Kontrak IPC | JSON Schema dibangkitkan dari struct di `either-ipc`; snapshot-nya di folder tes crate |
+| Daemon logs | `journalctl --user -u eitherd -f`; set the level with `EITHER_LOG` (`trace`, `debug`, `info`) |
+| Talk to the core socket | `socat - UNIX-CONNECT:$XDG_RUNTIME_DIR/either/core.sock`, then send one JSON line, for example `{"jsonrpc":"2.0","id":1,"method":"hello","params":{"proto":1,"client":"debug","version":"0.1.0"}}` |
+| Hyprland state | `hyprctl`; log at `$XDG_RUNTIME_DIR/hypr/<instance>/hyprland.log` |
+| Crashes | `coredumpctl`; Hyprland crash reports at `~/.cache/hyprland/hyprlandCrashReport<PID>.txt` |
+| Failed units | `systemctl --user --failed` |
+| IPC contract | JSON Schema is generated from the structs in `either-ipc`; the snapshots live next to the crate's tests |
 
-## 6. Menjaga sesi harian tetap aman
+## 6. Keeping your daily session safe
 
-Mesin development biasanya juga desktop harian, jadi uji di salinan sementara:
+A development machine is often also a daily desktop, so test against throwaway copies:
 
-- jalankan `eitherd` dan shell dev dengan `EITHER_RUNTIME_DIR` terpisah, jangan memakai socket sesi asli;
-- arahkan `XDG_CONFIG_HOME` dan `XDG_STATE_HOME` ke folder sementara (`mktemp -d`); jangan menimpa `~/.config/hypr`, `~/.config/either`, atau `~/.local/state/either`;
-- jangan menguji lock screen di sesi yang sedang dipakai; gagal membuka kunci mengunci pengguna di luar sesinya. Pakai VM atau Hyprland bersarang;
-- kembalikan state yang diubah saat uji (tema, DND, profil daya).
+- run `eitherd` and the dev shell with a separate `EITHER_RUNTIME_DIR`, never the real socket;
+- point `XDG_CONFIG_HOME` and `XDG_STATE_HOME` at a temporary directory (`mktemp -d`); do not overwrite `~/.config/hypr`, `~/.config/either`, or `~/.local/state/either`;
+- do not test a lock screen in the session you are using, because a failed unlock locks you out; use a VM or a nested session;
+- restore any state you changed while testing (theme, do-not-disturb, power profile).
 
-## 7. Berkontribusi
+## 7. Local hook extensions
 
-Baca [CONTRIBUTING.md](../../CONTRIBUTING.md), lalu ambil tugas dari backlog rilis berjalan.
+The hooks in `scripts/hooks/` run the same checks for everyone. A maintainer or an organisation can add policy checks of their own without touching the repository: an executable named after the hook (`commit-msg`, `pre-commit`, `pr-text`, `check`) placed in `<git dir>/hooks.d/` or in `~/.config/either-dev/hooks.d/` runs after the built-in checks, and a non-zero exit blocks the operation. `just check` runs the `check` hook through `just local-check`.
+
+To make a missing extension an error on a machine that relies on one:
+
+```bash
+git config --global either.requireLocalHooks true
+```
+
+Contributors do not need extensions and are not affected.
+
+## 8. Contributing
+
+Read [CONTRIBUTING.md](../../CONTRIBUTING.md), then pick an item from the backlog of the current release.
