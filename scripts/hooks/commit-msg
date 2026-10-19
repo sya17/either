@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# First line must be a Conventional Commit (docs/development/workflow.md). CI repeats this check.
+# SPDX-License-Identifier: GPL-3.0-or-later
+# The first line must be a Conventional Commit (docs/development/workflow.md). Local hooks run afterwards.
 set -uo pipefail
 
 msg="$(grep -v '^#' "$1" | head -n1)"
@@ -10,7 +11,7 @@ esac
 re='^(feat|fix|perf|refactor|docs|style|test|build|ci|chore|revert)(\([a-z0-9._/-]+\))?!?: .+$'
 if [[ ! "$msg" =~ $re ]] || ((${#msg} > 72)); then
     {
-        echo "commit-msg: first line must be 'type(scope): description', at most 72 characters."
+        echo "commit-msg: the first line must be 'type(scope): description', at most 72 characters."
         echo "  types: feat fix perf refactor docs style test build ci chore revert"
         echo "  got:   $msg"
         echo "  see docs/development/workflow.md"
@@ -18,9 +19,6 @@ if [[ ! "$msg" =~ $re ]] || ((${#msg} > 72)); then
     exit 1
 fi
 
-# Per-clone word list; no list means no check.
-list="$(git rev-parse --git-path info/forbidden-words)"
-if [[ -s "$list" ]] && grep -v '^#' "$1" | grep -Ei -f "$list" >/dev/null; then
-    echo "commit-msg: the message matches the local word list (info/forbidden-words); rewrite it." >&2
-    exit 1
-fi
+# shellcheck source=scripts/lib/hooks.sh
+. "$(git rev-parse --show-toplevel)/scripts/lib/hooks.sh"
+run_local_hook commit-msg "$1"

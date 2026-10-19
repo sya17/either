@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
 # Point git at the shared hooks. Run once per clone: `just setup`.
 set -euo pipefail
 
