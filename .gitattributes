@@ -1,0 +1,11 @@
+# Line endings: LF everywhere (see .editorconfig).
+* text=auto eol=lf
+
+# Binary assets: never diffed or normalized.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.woff2 binary
+*.ttf binary
+*.otf binary

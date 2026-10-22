@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Fail on literal colors, durations, font sizes, radii, spacing, padding and margins in shell QML.
 
-Everything visual comes from the tokens (docs/development/design.md). `shell/theme/` is exempt.
+Everything visual comes from the tokens (docs/development/design-system.md). `shell/theme/` is exempt.
 A line may opt out with a trailing `// lint-ok: <reason>`.
 """
 import re

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Fail when a relative link in a Markdown file points to a file that does not exist.
 
 Anchors (#...) and external links are not checked. Code blocks and inline code are skipped.

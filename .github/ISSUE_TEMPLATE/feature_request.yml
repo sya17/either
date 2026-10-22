@@ -1,0 +1,25 @@
+name: Feature request
+description: Suggest a feature or an improvement
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The scope of each release is fixed by the [roadmap](https://github.com/sya17/either/blob/main/docs/roadmap.md), and a new component enters 1.0 only if another one leaves. A clear problem is more useful than a long list of features.
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What are you trying to do, and what gets in the way?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What you would like
+      description: Your idea, and any alternatives you considered.
+  - type: input
+    id: release
+    attributes:
+      label: Where it fits in the roadmap
+      description: The release or part of the roadmap this relates to, if you know.

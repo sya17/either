@@ -1,8 +1,8 @@
-# tokens
+# Design tokens
 
-Sumber tunggal warna, tipografi, spasi, radius, dan motion: [tokens.json](tokens.json). Nilainya berasal dari design system either dan diadopsi lewat [ADR 0002](../../docs/adr/0002-design-system-sebagai-sumber-token.md); aturan pemakaiannya di [docs/development/design.md](../../docs/development/design.md).
+The single source of colors, typography, spacing, radii, and motion: [tokens.json](tokens.json). The values come from the either design system and were adopted through [ADR 0002](../../docs/adr/0002-design-system-as-token-source.md); the rules for using them are in [the design system](../../docs/development/design-system.md).
 
-- Format: `color.tokens` (nama, nilai per tema `dusk` dan `dawn`, kegunaan; `{nama}` merujuk token lain), `type`, `spacing`, `radius`, `motion`.
-- `either-theme` (0.2.0) membangkitkan `Tokens.qml` dan keluaran Hyprland, GTK, Qt, dan terminal dari berkas ini. Tidak ada kode yang membaca berkas ini sebelum itu.
-- `just tokens-check` memeriksa struktur, referensi, dan kontras teks 4,5:1. Jalankan sebelum mengubah berkas ini.
-- Nilai tinggi bar, lebar panel, dan motion selain `duration-fast` dan `duration-panel` belum ada di sini; ditetapkan saat kalibrasi 0.2.0.
+- Format: `color.tokens` (a name, a value for each theme `dusk` and `dawn`, and a usage note; `{name}` refers to another token), `type`, `spacing`, `radius`, `motion`.
+- `either-theme` (0.2.0) generates `Tokens.qml` and the Hyprland, GTK, Qt, and terminal output from this file. No code reads it before that.
+- `just tokens-check` verifies structure, references, and text contrast of 4.5:1. Run it before changing this file.
+- Bar height, panel width, and motion beyond `duration-fast` and `duration-panel` are not in this file yet; they are set during the 0.2.0 calibration.

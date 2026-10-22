@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Validate design/tokens/tokens.json (structure, references, contrast rules in docs/development/design.md)
+# SPDX-License-Identifier: GPL-3.0-or-later
+"""Validate design/tokens/tokens.json (structure, references, contrast rules in docs/development/design-system.md)
 and the SVG files in design/assets (only token colors, no scripts, no external references, no live text)."""
 import json
 import re
