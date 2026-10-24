@@ -22,7 +22,9 @@ allow = [
     "GPL-2.0-or-later",
     "GPL-3.0-only",
     "GPL-3.0-or-later",
-    # "Unicode-3.0" is likely needed (unicode-ident). Add it in a PR that says why, not silently.
+    # Permissive and GPL-compatible. unicode-ident uses it for its Unicode data tables, and every
+    # serde derive pulls unicode-ident in through proc-macro2.
+    "Unicode-3.0",
 ]
 
 [sources]
