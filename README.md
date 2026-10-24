@@ -83,7 +83,7 @@ either is developed on Arch Linux with Hyprland. No runtime code exists yet, so 
 
 | | |
 | --- | --- |
-| Checked on every change | Rust formatting and Clippy with warnings as errors, ShellCheck, `qmllint`, dependency advisories and licenses with `cargo-deny`, relative links in the documentation, that every tracked text file is in English, the structure and WCAG contrast of the design tokens and the files in `design/assets`, that QML uses no literal colours or sizes, that every source file carries an SPDX license header, and that the tree only holds components from the 1.0 inventory. They run through git hooks and `just check`. A CI service is not set up yet. |
+| Checked on every change | Rust formatting and Clippy with warnings as errors, ShellCheck, `qmllint`, dependency advisories and licenses with `cargo-deny`, relative links in the documentation, that every tracked text file is in English, the structure and WCAG contrast of the design tokens and the files in `design/assets`, that QML uses no literal colours or sizes, that every source file carries an SPDX license header, and that the tree only holds components from the 1.0 inventory. They run through git hooks and `just check`, and CI runs `just check` on every pull request and every push to `main`. |
 | Checked by hand | Nothing yet. Runtime behaviour such as the bar, the Hyprland bridge and the package install is verified on a real Arch session as each release lands. |
 | Not tested | Everything that needs a running session: Hyprland and Quickshell integration (to be verified in 0.1.0), NVIDIA graphics, several monitors, fractional scaling, other distributions. |
 
