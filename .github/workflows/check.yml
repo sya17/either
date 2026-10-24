@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# The pull request gate. It only calls `just check`, so the list of checks lives in the justfile and
+# changing CI platform stays cheap (docs/adr/0005-github-actions-as-temporary-ci.md).
+# No secrets: without local hooks `just local-check` passes here; the maintainer's own pattern
+# checks on commit and pull request text run on their machine (pre-push hook and `just pr`).
+name: check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    # Image pinned by digest. Packages still follow Arch until the version-strategy decision says
+    # what pinning them means.
+    container: archlinux:base-devel@sha256:3cbf69d2d5958d6a294f3722c5668e6187c4df8e00fa27f72352f0bf83e495e1
+    timeout-minutes: 30
+    steps:
+      # git first: without it the checkout action downloads a tarball with no repository in it.
+      - name: Install tools
+        run: pacman -Syu --noconfirm --needed git rustup just shellcheck cargo-deny qt6-declarative python
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Trust the checkout
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      # A squash merge turns the pull request title into the commit message on main.
+      - name: Conventional Commit format
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          msg="$(mktemp)"
+          if [ -n "$TITLE" ]; then printf '%s\n' "$TITLE" > "$msg"; else git log -1 --format=%B > "$msg"; fi
+          scripts/hooks/commit-msg "$msg"
+
+      - name: Rust toolchain from rust-toolchain.toml
+        working-directory: core
+        run: rustup toolchain install
+
+      - run: just check

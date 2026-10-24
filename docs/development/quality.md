@@ -26,9 +26,10 @@ The gates are defined once, in the `justfile` (`just check`). CI only calls them
 | QML literals | `scripts/check-qml-literals.py`: no literal color, duration, size, radius, or spacing | `just qml-check` | active; checked against examples, no QML yet |
 | SPDX headers | `scripts/check-spdx.py` | `just spdx-check` | active |
 | Scope | `scripts/check-scope.py`: only crates, binaries, and top-level directories from the 1.0 inventory | `just scope-check` | active |
-| Commit message format | the `commit-msg` hook | `just setup` | active |
+| Commit message format | the `commit-msg` hook; CI runs the same hook on the pull request title, or on the commit pushed to `main` | `just setup` | active |
 | Secrets | the `pre-commit` hook rejects a private key; `.gitignore` blocks `*.pem *.key .env* *.kdbx` | `just setup` | active, as a safety net and not a replacement for care |
 | Full gate before a push | the `pre-push` hook runs `just check` | `just setup` | active |
+| Full gate on the server | `.github/workflows/check.yml` runs `just check` in an Arch container pinned by digest, on every pull request and every push to `main` | CI | active |
 | Pull request title and body | `scripts/open-pr.sh` checks the title format and runs the local `pr-text` hook | `just pr` | active; protects only pull requests opened through it |
 | Optional local checks | hooks in `<git dir>/hooks.d/` or `~/.config/either-dev/hooks.d/` | `just local-check` | optional; see [setup](setup.md#7-local-hook-extensions) |
 | Accessibility lint for QML | not available yet | | waits for a decision record |
