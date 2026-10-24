@@ -1,0 +1,300 @@
+---
+source: crates/either-ipc/tests/contract.rs
+expression: schemas
+---
+{
+  "EmptyResult": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "EmptyResult",
+    "description": "Result of `subscribe` and `unsubscribe`. An object, so fields can be added later.",
+    "type": "object"
+  },
+  "Event": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Event",
+    "description": "An event, delivered as the params of an `event` notification.",
+    "type": "object",
+    "properties": {
+      "data": true,
+      "seq": {
+        "description": "Grows with every event the daemon publishes.",
+        "type": "integer",
+        "format": "uint64",
+        "minimum": 0
+      },
+      "topic": {
+        "description": "`<domain>.<object>.<event>`, for example `hypr.workspace.focused`.",
+        "type": "string"
+      },
+      "ts": {
+        "description": "Milliseconds since the Unix epoch.",
+        "type": "integer",
+        "format": "uint64",
+        "minimum": 0
+      },
+      "v": {
+        "description": "Version of the event format: 1 in proto 1.",
+        "type": "integer",
+        "format": "uint32",
+        "minimum": 0
+      }
+    },
+    "required": [
+      "v",
+      "seq",
+      "ts",
+      "topic",
+      "data"
+    ]
+  },
+  "HelloParams": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "HelloParams",
+    "description": "Params of `hello`, which must be the first message on a connection.",
+    "type": "object",
+    "properties": {
+      "client": {
+        "description": "What is connecting, for example `shell` or `cli`.",
+        "type": "string"
+      },
+      "proto": {
+        "type": "integer",
+        "format": "uint32",
+        "minimum": 0
+      },
+      "version": {
+        "description": "Version of the client package.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "proto",
+      "client",
+      "version"
+    ]
+  },
+  "HelloResult": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "HelloResult",
+    "description": "Result of `hello`.",
+    "type": "object",
+    "properties": {
+      "daemon": {
+        "description": "Version of the daemon package.",
+        "type": "string"
+      },
+      "proto": {
+        "type": "integer",
+        "format": "uint32",
+        "minimum": 0
+      },
+      "seq": {
+        "description": "The latest event `seq` at the time of the answer.",
+        "type": "integer",
+        "format": "uint64",
+        "minimum": 0
+      }
+    },
+    "required": [
+      "proto",
+      "daemon",
+      "seq"
+    ]
+  },
+  "Notification": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Notification",
+    "description": "A message without an `id`; it gets no response. The daemon delivers events this way.",
+    "type": "object",
+    "properties": {
+      "jsonrpc": {
+        "$ref": "#/$defs/JsonRpc"
+      },
+      "method": {
+        "type": "string"
+      },
+      "params": true
+    },
+    "required": [
+      "jsonrpc",
+      "method"
+    ],
+    "$defs": {
+      "JsonRpc": {
+        "description": "The `\"jsonrpc\": \"2.0\"` member. Any other value is rejected.",
+        "type": "string",
+        "enum": [
+          "2.0"
+        ]
+      }
+    }
+  },
+  "Request": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Request",
+    "description": "A call that expects a response with the same `id`.",
+    "type": "object",
+    "properties": {
+      "id": {
+        "$ref": "#/$defs/Id"
+      },
+      "jsonrpc": {
+        "$ref": "#/$defs/JsonRpc"
+      },
+      "method": {
+        "type": "string"
+      },
+      "params": true
+    },
+    "required": [
+      "jsonrpc",
+      "id",
+      "method"
+    ],
+    "$defs": {
+      "Id": {
+        "description": "A request id: a number or a string, as JSON-RPC 2.0 allows.",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "JsonRpc": {
+        "description": "The `\"jsonrpc\": \"2.0\"` member. Any other value is rejected.",
+        "type": "string",
+        "enum": [
+          "2.0"
+        ]
+      }
+    }
+  },
+  "Response": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Response",
+    "description": "The answer to a request, with the same `id`. `id` is null only when the request could not be\nread.",
+    "type": "object",
+    "properties": {
+      "id": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/Id"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "jsonrpc": {
+        "$ref": "#/$defs/JsonRpc"
+      }
+    },
+    "oneOf": [
+      {
+        "type": "object",
+        "properties": {
+          "result": true
+        },
+        "required": [
+          "result"
+        ]
+      },
+      {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/$defs/ErrorObject"
+          }
+        },
+        "required": [
+          "error"
+        ]
+      }
+    ],
+    "required": [
+      "jsonrpc"
+    ],
+    "$defs": {
+      "ErrorObject": {
+        "description": "A JSON-RPC error. `code` stays a plain integer so a client can read codes added later.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "data": true,
+          "message": {
+            "description": "For the codes of proto 1, the error name in snake_case, such as `version_mismatch`.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "Id": {
+        "description": "A request id: a number or a string, as JSON-RPC 2.0 allows.",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "JsonRpc": {
+        "description": "The `\"jsonrpc\": \"2.0\"` member. Any other value is rejected.",
+        "type": "string",
+        "enum": [
+          "2.0"
+        ]
+      }
+    }
+  },
+  "SnapshotResult": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "SnapshotResult",
+    "description": "Result of `state.snapshot`: the full state of each domain and the `seq` it reflects.",
+    "type": "object",
+    "properties": {
+      "domains": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "seq": {
+        "type": "integer",
+        "format": "uint64",
+        "minimum": 0
+      }
+    },
+    "required": [
+      "seq",
+      "domains"
+    ]
+  },
+  "TopicsParams": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "TopicsParams",
+    "description": "Params of `subscribe` and `unsubscribe`: topic globs such as `hypr.*`.",
+    "type": "object",
+    "properties": {
+      "topics": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "topics"
+    ]
+  }
+}

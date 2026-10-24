@@ -91,10 +91,12 @@ The shell may read workspace and window state straight from Quickshell's Hyprlan
 
 ### Contract
 
-- One JSON object per line, at most 1 MiB. Large data, such as images, is exchanged as a file path.
+- One JSON object per line, at most 1 MiB (1,048,576 bytes, not counting the `\n`). A sender refuses a longer message; a reader reports a longer line and skips the rest of it. Large data, such as images, is exchanged as a file path.
 - The first message must be `hello {proto, client, version}`. The daemon rejects an unsupported major version with `version_mismatch`.
-- Every event has the shape `{v, seq, ts, topic, data}`. `seq` only grows, so a client can detect a missed event.
-- Message types are Rust structs in `either-ipc`. JSON Schema is generated from them (`schemars`) for documentation and contract tests.
+- Every event has the shape `{v, seq, ts, topic, data}`, sent as the params of an `event` notification. `ts` is in milliseconds since the Unix epoch. `seq` only grows, so a client can detect a missed event.
+- `subscribe` and `unsubscribe` take `{topics}` and return an empty object; `state.snapshot` returns `{seq, domains}`. Results are objects so that fields can be added within one `proto`.
+- A response carries exactly one of `result` or `error`. For the codes below, the error `message` is the error name, such as `version_mismatch`.
+- Message types are Rust structs in `either-ipc`. JSON Schema is generated from them (`schemars`) and kept as a snapshot in `core/crates/either-ipc/tests/snapshots/`; a change to the wire format fails the tests until the snapshot is updated.
 
 ```json
 {"jsonrpc":"2.0","id":1,"method":"hello","params":{"proto":1,"client":"shell","version":"0.1.0"}}
